@@ -23,11 +23,6 @@ public class Main {
         }
 
         SimpleNum recognizer = new SimpleNum(grid.toString());
-        recognizer.setInputNeurons();
-        recognizer.setUpWeights();
-        recognizer.getOutputNeurons();
-        int result = recognizer.findMaxIndex();
-
-        System.out.println(result);
+        System.out.println(recognizer.recognizeNumber());
     }
 }

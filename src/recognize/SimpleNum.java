@@ -46,25 +46,25 @@ public class SimpleNum {
      * The rows represent the number and the columns represent the value of each neuron.
      * -1 Not activated and 1 activated.
      */
-    public void setUpWeights(){
+    private void setUpWeights(){
 
-        this.weights[0] = new int[] {-1, +1, -1, -1, +1, -1, -1, +1, -1, -1, +1, -1, -1, +1, -1}; //1
-        this.weights[1] = new int[] {+1, +1, +1, -1, -1, +1, +1, +1, +1, +1, -1, -1, +1, +1, +1}; //2
-        this.weights[2] = new int[] {+1, +1, +1, -1, -1, +1, +1, +1, +1, -1, -1, +1, +1, +1, +1}; //3
-        this.weights[3] = new int[] {+1, -1, +1, +1, -1, +1, +1, +1, +1, -1, -1, +1, -1, -1, +1}; //4
-        this.weights[4] = new int[] {+1, +1, +1, +1, -1, -1, +1, +1, +1, -1, -1, +1, +1, +1, +1}; //5
-        this.weights[5] = new int[] {+1, +1, +1, +1, -1, -1, +1, +1, +1, +1, -1, +1, +1, +1, +1}; //6
-        this.weights[6] = new int[] {+1, +1, +1, -1, -1, +1, -1, -1, +1, -1, -1, +1, -1, -1, +1}; //7
-        this.weights[7] = new int[] {+1, +1, +1, +1, -1, +1, +1, +1, +1, +1, -1, +1, +1, +1, +1}; //8
-        this.weights[8] = new int[] {+1, +1, +1, +1, -1, +1, +1, +1, +1, -1, -1, +1, +1, +1, +1}; //9
-        this.weights[9] = new int[] {+1, +1, +1, +1, -1, +1, +1, -1, +1, +1, -1, +1, +1, +1, +1}; //0
+        this.weights[0] = new int[] {-1, +1, -1, -1, +1, -1, -1, +1, -1, -1, +1, -1, -1, +1, -1};
+        this.weights[1] = new int[] {+1, +1, +1, -1, -1, +1, +1, +1, +1, +1, -1, -1, +1, +1, +1};
+        this.weights[2] = new int[] {+1, +1, +1, -1, -1, +1, +1, +1, +1, -1, -1, +1, +1, +1, +1};
+        this.weights[3] = new int[] {+1, -1, +1, +1, -1, +1, +1, +1, +1, -1, -1, +1, -1, -1, +1};
+        this.weights[4] = new int[] {+1, +1, +1, +1, -1, -1, +1, +1, +1, -1, -1, +1, +1, +1, +1};
+        this.weights[5] = new int[] {+1, +1, +1, +1, -1, -1, +1, +1, +1, +1, -1, +1, +1, +1, +1};
+        this.weights[6] = new int[] {+1, +1, +1, -1, -1, +1, -1, -1, +1, -1, -1, +1, -1, -1, +1};
+        this.weights[7] = new int[] {+1, +1, +1, +1, -1, +1, +1, +1, +1, +1, -1, +1, +1, +1, +1};
+        this.weights[8] = new int[] {+1, +1, +1, +1, -1, +1, +1, +1, +1, -1, -1, +1, +1, +1, +1};
+        this.weights[9] = new int[] {+1, +1, +1, +1, -1, +1, +1, -1, +1, +1, -1, +1, +1, +1, +1};
 
     }
 
     /**
      * Setting the values of the neurons to 0 OR 1
      */
-    public void setInputNeurons(){
+    private void setInputNeurons(){
         for(int neuron = 0; neuron < this.grid.length(); neuron++){
             if(this.grid.charAt(neuron) == 'X'){
                 this.twoLayerNetwork[0][neuron] = 1;
@@ -80,7 +80,7 @@ public class SimpleNum {
      *  weight the weight for each of the numbers 1,2,3,4,5,6,7,8,9 and the neurons activated, representing them.
      *  BIAS the preset biases which stabalize the nework. (16th neuron)
      */
-    public void getOutputNeurons(){
+    private void getOutputNeurons(){
         for(int i = 0; i < 10; ++i){
             for(int j = 0; j < 15; ++j){
                 //Calculating for each input neuron * weight.
@@ -93,7 +93,7 @@ public class SimpleNum {
     /** Finding the output note with maximum activation.
      * @return
      */
-    public int findMaxIndex(){
+    private int findMaxIndex(){
         int max = 0;
         int index = 0;
         for(int m = 0; m < 10; ++m){
@@ -110,6 +110,15 @@ public class SimpleNum {
         //If the last neuron has the biggest activation set to 0.
         if(index == 10){ index = 0;}
         return index;
+    }
+
+
+    public int recognizeNumber() {
+        this.setInputNeurons();
+        this.setUpWeights();
+        this.getOutputNeurons();
+
+        return this.findMaxIndex();
     }
 
 }
