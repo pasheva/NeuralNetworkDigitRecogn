@@ -1,8 +1,14 @@
 import java.util.*;
 import recognize.SimpleNum;
+import learn.Generator;
+
 
 public class Main {
     public static void main(String[] args) {
+
+        /**
+         *  STAGE 2 BEGIN ===================================
+         */
         Scanner userInput = new Scanner(System.in);
 
         /*
@@ -24,5 +30,12 @@ public class Main {
 
         SimpleNum recognizer = new SimpleNum(grid.toString());
         System.out.println(recognizer.recognizeNumber());
+        /**
+         *  STAGE 2 END =======================================
+         */
+
+
+
+
     }
 }
