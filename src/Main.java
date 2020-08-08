@@ -20,20 +20,31 @@ public class Main {
          *  _XX
          */
 
-        StringBuilder grid = new StringBuilder();
+//        StringBuilder grid = new StringBuilder();
+//
+//        //Taking the input grid of the number;
+//        for (int row = 0; row < 5; ++row) {
+//            String line = userInput.nextLine();
+//            grid.append(line);
+//        }
 
-        //Taking the input grid of the number;
-        for (int row = 0; row < 5; ++row) {
-            String line = userInput.nextLine();
-            grid.append(line);
-        }
-
-        SimpleNum recognizer = new SimpleNum(grid.toString());
-        System.out.println(recognizer.recognizeNumber());
+//        SimpleNum recognizer = new SimpleNum(grid.toString());
+//        System.out.println(recognizer.recognizeNumber());
         /**
          *  STAGE 2 END =======================================
          */
 
+        /**
+         *  STAGE 3 BEGIN =======================================
+         */
+
+        Generator test = new Generator();
+        test.generateWeights();
+
+
+        /**
+         *  STAGE 3 END =======================================
+         */
 
 
 

@@ -5,7 +5,8 @@ import java.util.Random;
 /**
  *   ============================== TASKS ===========================
  *   Handle exceptions, test if the input format matches. (regular expressions,IOexception)
- *
+ *   Calculate output neurons
+ *   
  */
 
 
@@ -23,8 +24,21 @@ public class Generator{
     
     public Generator(){
         
-        int[][] idealInputNeurons = new int[10][15];
-        int[][] weigths = new int[10][16];
+        this.idealInputNeurons = new int[10][15];
+        this.weights = new double[10][16];
+    }
+
+    /**
+     *  Helper method.
+     *  The Sigmoid function is needed because the value of the neurons
+     *  has to be between 0 or 1 as to how activated the neuron is.
+     *  Using the function will help us fit into the range from 0 to 1
+     *
+     * @param x The initial value of the output neuron.
+     * @return Value between 0 and 1.
+     */
+    private static double sigmoid(double x){
+        return 1/(1 + Math.exp(-x));
     }
     
     private void setIdealInputNeurons(){
@@ -40,41 +54,24 @@ public class Generator{
         this.idealInputNeurons[9] = new int[] {1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1};
     }
 
-
-    
-    
-    /**
-     *  Helper method.
-     *  The Sigmoid function is needed because the value of the neurons
-     *  has to be between 0 or 1 as to how activated the neuron is.
-     *  Using the function will help us fit into the range from 0 to 1
-     *
-     * @param x The initial value of the output neuron.
-     * @return Value between 0 and 1.
-     */
-    private static double sigmoid(double x){
-        return 1/(1 + Math.exp(-x));
-    }
-
-
     /**
      *  generateWeights()
      */
-    public static void generateWeights( ){
+    public void generateWeights( ){
         Random random = new Random();
-        for(int i = 0; i<16; i++){
-            // Rounding to second decimal point -> 1 * 10^2 = 100
-            double neuronWeight = Math.round( (random.nextGaussian()) * 1e2) / 1e2;
+        for( int n  = 0; n < 10; n++){
+            for(int i = 0; i<16; i++){
+                // Rounding to second decimal point -> 1 * 10^2 = 100
+                double neuronWeight = Math.round( (random.nextGaussian()) * 1e2) / 1e2;
 
-            //Restricting to values between 1.0 and -1.0
-            if (neuronWeight >= 1.0 || neuronWeight <= -1.0){
-               i--;
-            }else{
-                System.out.print(neuronWeight);
-                System.out.println("\n");
+                //Restricting to values between 1.0 and -1.0
+                if (neuronWeight >= 1.0 || neuronWeight <= -1.0){
+                    i--;
+                }else{
+                    this.weights[n][i] = neuronWeight;
+                }
             }
         }
-
     }
 
 
